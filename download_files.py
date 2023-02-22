@@ -20,8 +20,6 @@ form_data = [ {'zipcode' : code} for code in zip_ranges]
 # Write url request  
 url = 'https://www.ups.com/zonecharts/'
 
-
-
 def send_post(form_data, file_name):
     response = session.post(url, data=form_data)
     if response.status_code == 200:
@@ -49,5 +47,5 @@ if not os.path.exists(folder):
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     for pos, form_req in enumerate(form_data):
-        file_name = str(pos + 1) + '.xls'
+        file_name = str(pos + 1) + '.xlsx'
         executor.submit(send_post, form_req, file_name)
